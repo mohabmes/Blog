@@ -15,7 +15,6 @@ class Blog {
   }
 
   public function create($blog = array()) {
-
     if(isset($blog) && !empty($blog) && sizeof($blog)==4) {
       $this->_title = trim(filter_var($blog['title'], FILTER_SANITIZE_STRING));
       $this->_body =  filter_var($blog['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -42,7 +41,6 @@ class Blog {
   }
 
   public function update($id, $blog = array()) {
-    global $db;
     if(!empty($id)){
       if(isset($blog) && !empty($blog) && sizeof($blog)==4) {
         $this->_title = trim(filter_var($blog['title'], FILTER_SANITIZE_STRING));
@@ -73,7 +71,6 @@ class Blog {
   }
 
   public function delete($id){
-    global $db;
     $qry = $this->_db->prepare('DELETE FROM `posts` WHERE id = :id');
     $qry->execute([
       'id' => $id
@@ -82,7 +79,6 @@ class Blog {
   }
 
   public function getById($id){
-    global $db;
     $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE id = :id');
     $qry->execute([
       'id' => $id
@@ -91,8 +87,35 @@ class Blog {
     return $result;
   }
 
+  public function getBySlug($slug){
+    $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE slug = :slug');
+    $qry->execute([
+      'slug' => $slug
+    ]);
+    $result = $qry->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  public function search($str){
+    echo 'SELECT * FROM `posts` WHERE `title` LIKE \'%:search%\' OR `body` LIKE \'%:search%\'';
+    $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE `title` LIKE :search OR `body` LIKE :search');
+    $qry->execute([
+      'search' => "%{$str}%"
+    ]);
+    $result = $qry->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  public function searchByTag($str){
+    $qry = $this->_db->prepare("SELECT * FROM `posts` WHERE `tags` = :search");
+    $qry->execute([
+      'search' => "$str"
+    ]);
+    $result = $qry->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
   public function getFrom($start, $count){
-    global $db;
     $qry = $this->_db->prepare("SELECT * FROM `posts` LIMIT {$start}, {$count}");
     $qry->execute();
     $result = $qry->fetchAll(PDO::FETCH_ASSOC);
@@ -100,11 +123,17 @@ class Blog {
   }
 
   public function getRecent($count){
-    global $db;
     $qry = $this->_db->prepare("SELECT * FROM `posts` ORDER BY `id` DESC LIMIT {$count}");
     $qry->execute();
     $result = $qry->fetchAll(PDO::FETCH_ASSOC);
     return $result;
+  }
+
+  public function getPostsCount(){
+    $qry = $this->_db->prepare("SELECT COUNT(id) FROM `posts`");
+    $qry->execute();
+    $result = $qry->fetch(PDO::FETCH_NUM);
+    return $result[0];
   }
 
   public function getDate($created, $updated){
