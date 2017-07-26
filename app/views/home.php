@@ -9,42 +9,43 @@
     </p>
   </div>
 
-  <div class="panel">
-    <p class="title">Recent Posts</p>
+
+    <div class="panel">
+      <p class="title">Recent Posts</p>
+        <?php
+          if(isset($recent) && !empty($recent)){
+            foreach ($recent as $post){
+              $post['created'] = $blogObj->getDate($post['created'], $post['updated'] );
+              $post['slug'] = $blogObj->getSlug($post['slug']);
+              $post['body'] = $blogObj->getPreviewBody($post['body']);
+              echo postPreview($post);
+            }
+          } else {
+            echo center('<< No post yet >>');
+          }
+        ?>
+    </div>
+
+    <div class="about">
+      <p class="title">About</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet.
+      </p>
+    </div>
+
+    <div class="tags">
+      <p class="title">Tags</p>
       <?php
-        if(isset($recent) && !empty($recent)){
-          foreach ($recent as $post){
-            $post['created'] = $blogObj->getDate($post['created'], $post['updated'] );
-            $post['slug'] = $blogObj->getSlug($post['slug']);
-            $post['body'] = $blogObj->getPreviewBody($post['body']);
-            echo postPreview($post);
+        if(isset($tags) && !empty($tags)){
+          foreach ($tags as $tag ){
+            echo tagsPreview($tag['title']);
           }
         } else {
-          echo center('<< No post yet >>');
+          echo center('<< No Tag yet >>');
         }
       ?>
-  </div>
+    </div>
 
-  <div class="about">
-    <p class="title">About</p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet.
-    </p>
-  </div>
-
-  <div class="tags">
-    <p class="title">Tags</p>
-    <?php
-      if(isset($tags) && !empty($tags)){
-        foreach ($tags as $tag ){
-          echo tagsPreview($tag['title']);
-        }
-      } else {
-        echo center('<< No Tag yet >>');
-      }
-    ?>
-  </div>
-    
   <br>
   <div class="clearfix"></div>
 </div>

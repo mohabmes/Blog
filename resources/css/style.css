@@ -168,7 +168,7 @@ input[type="submit"]:hover{
 	background-color: #fcfcfc;
 	border-radius: 2px;
 }
-.post:hover{
+.post:hover .post-title{
 	opacity: 0.75;
 }
 .post-title {
@@ -237,4 +237,42 @@ input[type="submit"]:hover{
 }
 .comment p{
 	margin-left:25px;
+}
+/********************************************
+Pagination
+********************************************/
+.pagination{width:100%; margin: 0 15px;}
+.pagination ul{
+	width:100%;
+	list-style:none;
+	padding:0;
+	margin: 0 auto;
+}
+.pagination ul li{
+	float:left;
+	background-color:#fafafa;
+	border: 1px solid #bbb;
+}
+.pagination ul li a{
+	display:inline-block;
+	padding: 4px 10px;
+}
+.pagination ul li a:hover {
+	background-color: #e6e6e6;
+}
+/********************************************
+Comment Section
+********************************************/
+.post-view form input{
+	display: inline-block;
+	margin: 7px 0;
+	width: 49%;
+}
+.post-view form input[type="submit"]{
+	display: block;
+	width: 10%;
+}
+.post-view form textarea{
+	padding: 7px;
+	width: 99%;
 }

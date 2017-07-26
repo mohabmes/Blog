@@ -1,5 +1,6 @@
 <?php
 class Tags{
+
   public static function get(){
       global $db;
       $qry = $db->prepare('SELECT title FROM tags');

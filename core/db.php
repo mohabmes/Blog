@@ -2,7 +2,6 @@
 
 $config = $GLOBALS['config']['mysql'];
 try{
-
   $db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['db'] ,
     $config['username']);
 

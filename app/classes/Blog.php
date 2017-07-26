@@ -45,19 +45,20 @@ class Blog {
       if(isset($blog) && !empty($blog) && sizeof($blog)==4) {
         $this->_title = trim(filter_var($blog['title'], FILTER_SANITIZE_STRING));
         $this->_body =  filter_var($blog['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $this->_slug =  filter_var($blog['slug'], FILTER_SANITIZE_STRING);
+        $this->_slug =  $this->slugFilter(filter_var($blog['slug'], FILTER_SANITIZE_STRING)).' ';
         $this->_tags  = filter_var($blog['tags'], FILTER_SANITIZE_STRING);
         $this->_updated = date('F, j Y');
+
+        $this->_slug .=rand();
 
         if(Tags::exists($this->_tags)){
           Tags::create($this->_tags);
         }
         if($this->validate()){
-          $sql = "UPDATE `posts` SET `slug`= :slug,`title`= :title,`body`= :body,`tags`= :tags,`updated`= :updated WHERE `id`= :id";
+          $sql = "UPDATE `posts` SET `title`= :title,`body`= :body,`tags`= :tags,`updated`= :updated WHERE `id`= :id";
           $qry = $this->_db->prepare($sql);
           $qry->execute([
             'id' => $id,
-            'slug' => $this->_slug,
             'title' => $this->_title,
             'body' => $this->_body,
             'tags' => $this->_tags,
@@ -97,7 +98,6 @@ class Blog {
   }
 
   public function search($str){
-    echo 'SELECT * FROM `posts` WHERE `title` LIKE \'%:search%\' OR `body` LIKE \'%:search%\'';
     $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE `title` LIKE :search OR `body` LIKE :search');
     $qry->execute([
       'search' => "%{$str}%"
@@ -154,8 +154,8 @@ class Blog {
   }
 
   public function getPreviewBody($body){
-    $body = substr($body, 450);
-    return $body . '...';
+    $nbody = substr($body,0, 500);
+    return $nbody . '...';
   }
 
   private function checkSlug($slug){
@@ -169,24 +169,25 @@ class Blog {
   }
 
   private function validate() {
-      if($this->checkSlug($this->_slug) && strlen($this->_slug)<30 && strlen($this->_slug)>=10){
-        if(strlen($this->_title)<50 && strlen($this->_title)>=20) {
-          if(!empty($this->_tags)){
-            if(strlen($this->_body)>=200) {
-              return true;
-            } else {
-              $this->_error[] = 'Blog must more than 200';
-            }
-          } else {
-            $this->_error[] = 'Must provide tag';
-          }
-        } else {
-          $this->_error[] = 'Title must be more than 20 and less than 50';
-        }
-      } else {
-        $this->_error[] = 'Slug must be unique, more than 10 and less than 25';
-      }
-    return false;
+    if($this->checkSlug($this->_slug) && strlen($this->_slug)<30 && strlen($this->_slug)>=10){}
+    else {
+      $this->_error[] = 'Slug must be unique, more than 10 and less than 25';
+      return false;
+    }
+    if(strlen($this->_title)<50 && strlen($this->_title)>=20){}
+    else {
+      $this->_error[] = 'Title must be more than 20 and less than 50';
+      return false;
+    }
+    if(empty($this->_tags)){
+      $this->_error[] = 'Must provide tag';
+      return false;
+    }
+    if(strlen($this->_body)<200){
+      $this->_error[] = 'Blog must more than 200';
+      return false;
+    }
+    return true;
   }
 
   private function slugFilter($slug){

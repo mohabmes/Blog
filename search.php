@@ -18,4 +18,4 @@ if(!empty(Input::get('search') || !empty(Input::get('tag')))) {
   header('Location: ' . BASE_URL);
 }
 
-require_once(APP . 'views/search.php');
+require_once(VIEWS . 'search.php');

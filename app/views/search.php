@@ -1,5 +1,5 @@
 <?php
-  $header = 'MMES | All posts';
+  $header = 'MMES | Search';
   require_once APP . 'views/header.php';
 ?>
 <div class="wrapper">

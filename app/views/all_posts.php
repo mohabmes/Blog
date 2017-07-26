@@ -1,14 +1,14 @@
 <?php
-  $header = 'MMES | Blog';
+  $header = 'MMES | All posts';
   require_once APP . 'views/header.php';
 ?>
 <div class="wrapper">
-  <form action="search.php" method="get" class="form">
-    <center>
-      <input type="text" name="search" placeholder="Search" value="<?php echo Input::get('search'); ?>">
-      <input type="submit" value="Search">
-    </center>
-  </form>
+    <form action="search/" method="get" class="form">
+      <center>
+        <input type="text" name="search" placeholder="Search" value="<?php echo Input::get('search'); ?>">
+        <input type="submit" value="Search">
+      </center>
+    </form>
 
   <div class="panel">
     <p class="title">All Posts</p>
@@ -38,9 +38,16 @@
       }
     ?>
   </div>
-  
-  <br>
   <div class="clearfix"></div>
+  <div class="pagination clearfix">
+    <ul>
+    <?php
+      for($i=1 ; $i<=$numOfPages ; $i++)
+        echo pages($i);
+    ?>
+    </ul>
+  </div>
+
 </div>
 <?php
   require_once APP . 'views/footer.php';
