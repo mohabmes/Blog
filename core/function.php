@@ -46,3 +46,17 @@ function pages($i){
 function escape($str){
   return htmlentities($str, ENT_QUOTES, "UTF-8");
 }
+
+function getWelcomeMsg(){
+	global $db;
+    $qry = $db->query('SELECT welcome FROM `user_data`');
+    $result = $qry->fetch(PDO::FETCH_ASSOC);
+    return $result['welcome'];
+}
+
+function getAboutSec(){
+	global $db;
+    $qry = $db->query('SELECT about FROM `user_data`');
+    $result = $qry->fetch(PDO::FETCH_ASSOC);
+    return $result['about'];
+}
