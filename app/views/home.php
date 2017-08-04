@@ -5,8 +5,7 @@
 <div class="wrapper">
   <div class="welcome-msg">
     <p>Welcome.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet. Fusce eleifend orci ut dolor vulputate Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet. Fusce eleifend orci ut dolor vulputate.
-    </p>
+    <p><?php echo getWelcomeMsg();?></p>
   </div>
 
 
@@ -28,9 +27,7 @@
 
     <div class="about">
       <p class="title">About</p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet.
-      </p>
+      <p><?php echo getAboutSec();?></p>
     </div>
 
     <div class="tags">
