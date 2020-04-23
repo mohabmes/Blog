@@ -1,0 +1,16 @@
+{
+	"title":"Slimey",
+	"email":"",
+	"description":"",
+	"twitter":"",
+	"github":"",
+	"instagram":"",
+	"facebook":"",
+
+	"database":{
+		"host": "127.0.0.1",
+		"username": "root",
+		"password": "",
+		"db": "blog"
+	}
+}
