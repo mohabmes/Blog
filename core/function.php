@@ -11,6 +11,10 @@ function summary($text){
   return substr($text, 0, 200) . "...";
 }
 
+function redirectTo($location){
+  header('Location: ' . $location);
+}
+
 function error($str){
   return '<div class="error">'.upper($str).'</div>';
 }

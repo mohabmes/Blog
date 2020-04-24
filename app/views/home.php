@@ -3,7 +3,7 @@
       <?php if(!empty($posts)): ?>
           <?php foreach ($posts as $post):?>
             <div class='post'>
-                <a href='<?=$post->slug?>'>
+                <a href='<?=POST.$post->slug?>'>
                   <h3 class='post-title'><?=$post->title?></h3>
                   <img src="<?=IMG . "8.jpg"?>">
                   <p class='post-body'><?=summary($post->body)?></p>
@@ -18,7 +18,7 @@
       <div class="pagination clearfix">
         <center>
           <?php for($i=1 ; $i<=$numOfPages ; $i++):?>
-            <a href="<?=BASE_URL.'posts/'.$i?>"> <?=$i?> </a>
+            <a href="<?=PAGE.$i?>"> <?=$i?> </a>
           <?php endfor; ?>
         </center>
       </div>

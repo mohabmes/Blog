@@ -20,3 +20,7 @@ require_once(classes . 'Tags.php');
 require_once(classes . 'Blog.php');
 require_once(classes . 'Input.php');
 require_once(classes . 'Comments.php');
+
+
+define('POST', BASE_URL."post.php?slug=");
+define('PAGE', BASE_URL."index.php?p=");
