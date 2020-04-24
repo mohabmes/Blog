@@ -1,12 +1,11 @@
-<footer>
-  <div class="wrapper">
-    <ul>
-      <li><a href="https://github.com/mohabmes">Github</a></li>
-      <li><a href="https://www.linkedin.com/in/mohabmes">Linkedin</a></li>
-      <li><a href="https://www.facebook.com/mohabmes">Facebook</a></li>
-    </ul>
-    <p>&copy;2017 All Rights Reserved.</a></p>
+<div class="wrapper">
+  <div class="footer">
+      <a href=""><img class="icon" src="<?=IMG."github.png"?>"></a>
+      <a href=""><img class="icon" src="<?=IMG."linkedin.png"?>"></a>
+      <a href=""><img class="icon" src="<?=IMG."www.png"?>"></a>
+      <a href=""><img class="icon" src="<?=IMG."linkedin.png"?>"></a>
+      <a href=""><img class="icon" src="<?=IMG."www.png"?>"></a>
   </div>
-</footer>
+</div>
 </body>
 </html>

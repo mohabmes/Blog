@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><?php echo $header; ?></title>
+		<title><?=$header;?></title>
 		<meta charset="utf-8" lang="en">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,6 +12,6 @@
 	<body>
 		<div class="wrapper">
 			<div class="nav">
-				<a href="<?=BASE_URL; ?>">Home</a>
+				<a href="<?=BASE_URL; ?>"><?=$header;?></a>
 		  </div>
 		</div>
