@@ -1,50 +1,35 @@
-<?php
-  $header = 'MMES | Blog';
-  require_once APP . 'views/header.php';
-?>
+<?php $header = title(); require_once(APP . 'views/header.php'); ?>
 <div class="wrapper">
-  <div class="welcome-msg">
-    <p>Welcome.</p>
-    <p><?php echo getWelcomeMsg();?></p>
-  </div>
+    <!-- <p class="title">All Posts</p> -->
+      <?php if(!empty($posts)): ?>
+          <?php foreach ($posts as $post):?>
+            <div class='post'>
+                <a href=''>
+                  <h3 class='post-title'>The reason we're gathered here on our God-given, much-naeeded day</h3>
+                  <img src="<?=IMG . "8.jpg"?>">
+                  <p class='post-body'>I can remember about 4 years ago, I started to make HTML templates for ThemeForest. Unfortunately, I failed to pass the quality stage and I was not getting enough feedback from them. I was getting...</p>
+                  <p class='post-date'>22 DEC 2015</p>
+                </a>
+            </div>
+          <?php endforeach?>
+          <?php foreach ($posts as $post):?>
+            <div class='post'>
+                <a href=''>
+                  <h3 class='post-title'>The reason we're gathered here on our God-given, much-naeeded day</h3>
+                  <img src="<?=IMG . "8.jpg"?>">
+                  <p class='post-body'>I can remember about 4 years ago, I started to make HTML templates for ThemeForest. Unfortunately, I failed to pass the quality stage and I was not getting enough feedback from them. I was getting...</p>
+                  <p class='post-date'>22 DEC 2015</p>
+                </a>
+            </div>
+          <?php endforeach?>
+      <?php else: ?>
+          <p><center>No post yet</center></p>
+      <?php endif;?>
 
+      <div class="pagination clearfix">
+        <ul><?php for($i=1 ; $i<=$numOfPages ; $i++) echo pages($i);?></ul>
+      </div>
 
-    <div class="panel">
-      <p class="title">Recent Posts</p>
-        <?php
-          if(isset($recent) && !empty($recent)){
-            foreach ($recent as $post){
-              $post['created'] = $blogObj->getDate($post['created'], $post['updated'] );
-              $post['slug'] = $blogObj->getSlug($post['slug']);
-              $post['body'] = $blogObj->getPreviewBody($post['body']);
-              echo postPreview($post);
-            }
-          } else {
-            echo center('<< No post yet >>');
-          }
-        ?>
-    </div>
-
-    <div class="about">
-      <p class="title">About</p>
-      <p><?php echo getAboutSec();?></p>
-    </div>
-
-    <div class="tags">
-      <p class="title">Tags</p>
-      <?php
-        if(isset($tags) && !empty($tags)){
-          foreach ($tags as $tag ){
-            echo tagsPreview($tag['title']);
-          }
-        } else {
-          echo center('<< No Tag yet >>');
-        }
-      ?>
-    </div>
-
-  <br>
-  <div class="clearfix"></div>
 </div>
-<?php
-  require_once APP . 'views/footer.php';
+
+<?php require_once(APP . 'views/footer.php');

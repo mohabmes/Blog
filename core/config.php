@@ -5,5 +5,6 @@ $config = array();
 foreach ($config_json as $key => $value) {
   $config[$key] = $value;
 }
-$GLOBALS['config'] = $config;
+$_GLOBALS['config'] = $config;
+// echo "<pre>"; print_r($GLOBALS['config']);exit();
 ?>

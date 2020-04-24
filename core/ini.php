@@ -8,7 +8,8 @@ define('APP',     './app/');
 define('classes', './app/classes/');
 define('VIEWS',   './app/views/');
 define('CSS',     './resources/css/');
-define('BASE_URL','http://localhost/Blog');
+define('IMG',     './resources/images/');
+define('BASE_URL','http://localhost/Blog/');
 
 require_once(CORE . 'function.php');
 require_once(CORE . 'config.php');

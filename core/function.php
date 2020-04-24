@@ -3,6 +3,10 @@ function upper($str){
   return ucfirst($str);
 }
 
+function title(){
+  return upper($GLOBALS['config']['title']);
+}
+
 function error($str){
   return '<div class="error">'.upper($str).'</div>';
 }
@@ -45,18 +49,4 @@ function pages($i){
 
 function escape($str){
   return htmlentities($str, ENT_QUOTES, "UTF-8");
-}
-
-function getWelcomeMsg(){
-	global $db;
-    $qry = $db->query('SELECT welcome FROM `user_data`');
-    $result = $qry->fetch(PDO::FETCH_ASSOC);
-    return $result['welcome'];
-}
-
-function getAboutSec(){
-	global $db;
-    $qry = $db->query('SELECT about FROM `user_data`');
-    $result = $qry->fetch(PDO::FETCH_ASSOC);
-    return $result['about'];
 }
