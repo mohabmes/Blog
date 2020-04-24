@@ -7,6 +7,10 @@ function title(){
   return upper($GLOBALS['config']['title']);
 }
 
+function summary($text){
+  return substr($text, 0, 200) . "...";
+}
+
 function error($str){
   return '<div class="error">'.upper($str).'</div>';
 }
@@ -40,11 +44,6 @@ function commentPreview($comment){
 function tagsPreview($tag){
   $url = BASE_URL . '/search/?tag=' . $tag;
   return "<a href='{$url}'><span>{$tag}</span></a>";
-}
-
-function pages($i){
-  $url = BASE_URL . '/posts/' . $i;
-  return "<li><a href='{$url}'>{$i}</a></li>";
 }
 
 function escape($str){

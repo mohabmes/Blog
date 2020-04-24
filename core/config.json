@@ -6,6 +6,8 @@
 	"github":"",
 	"instagram":"",
 	"facebook":"",
+	"linkedin":"",
+	"postsPerPage": 5,
 
 	"database":{
 		"host": "127.0.0.1",

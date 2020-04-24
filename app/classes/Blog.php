@@ -118,7 +118,7 @@ class Blog {
   public function getFrom($start, $count){
     $qry = $this->_db->prepare("SELECT * FROM `posts` LIMIT {$start}, {$count}");
     $qry->execute();
-    $result = $qry->fetchAll(PDO::FETCH_ASSOC);
+    $result = $qry->fetchAll(PDO::FETCH_OBJ);
     return $result;
   }
 
