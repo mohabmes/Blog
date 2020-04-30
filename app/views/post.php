@@ -1,11 +1,11 @@
 <?php
-  $header = 'MMES | '.$data['title'];
-  require_once APP . 'views/header.php';
+  $header = title(). ' | '.$data['title'];
+  require_once(APP . 'views/header.php');
 ?>
 <div class="wrapper view">
   <div class="post-view">
       <p class="post-title-view">
-        <?php echo $data['title']; ?>
+        <?=$post->title; ?>
       </p>
       <p class="post-body-view"><?php echo $data['body'];?></p>
   </div>

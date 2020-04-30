@@ -1,19 +1,33 @@
 <?php
 require_once('core/ini.php');
 
-$tags = Tags::get();
 $blogObj = new Blog();
-$postsCount = $blogObj->getPostsCount();
-$numOfPages = ceil($postsCount/5);
-if($page = Input::get('p')){
-  if($page>$numOfPages)
-    header('Location: ' . BASE_URL);
+$currentPage = Input::get('p');
 
-  $page = ($page-1) * 5;
-  $posts = $blogObj->getFrom($page, 5);
-}
-else {
-  $posts = $blogObj->getFrom(0, 5);
-}
-// echo "<pre>"; print_r($posts); exit();
+$postsPerPage = $GLOBALS['config']['postsPerPage'];
+
+$posts = handlePagination($blogObj, $currentPage, $postsPerPage);
+$numOfPages = paginationCount($blogObj, $postsPerPage);
+
 require_once(VIEWS . 'home.php');
+
+
+function handlePagination($blogObj, $currentPage, $postsPerPage){
+  $postsCount = $blogObj->getPostsCount();
+  $numOfPages = paginationCount($blogObj, $postsPerPage);
+
+  if($currentPage > $numOfPages) redirectTo(BASE_URL);
+
+  if(!empty($currentPage)){
+    $currentPage = ($currentPage-1) * $postsPerPage;
+    return $posts = $blogObj->getFrom($currentPage, $postsPerPage);
+  }
+  else{
+    return $posts = $blogObj->getFrom(0, $postsPerPage);
+  }
+}
+
+function paginationCount($blogObj, $postsPerPage){
+  $numOfPages = ceil($blogObj->getPostsCount() / $postsPerPage);
+  return $numOfPages;
+}

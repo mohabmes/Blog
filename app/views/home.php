@@ -5,9 +5,9 @@
             <div class='post'>
                 <a href='<?=POST.$post->slug?>'>
                   <h3 class='post-title'><?=$post->title?></h3>
-                  <img src="<?=IMG . "8.jpg"?>">
+                  <img src="<?=IMG.$post->image?>">
                   <p class='post-body'><?=summary($post->body)?></p>
-                  <p class='post-date'><?=$post->created?></p>
+                  <p class='post-date'><?=timestampToDate($post->created)?></p>
                 </a>
             </div>
           <?php endforeach?>

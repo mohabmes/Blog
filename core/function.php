@@ -15,6 +15,10 @@ function redirectTo($location){
   header('Location: ' . $location);
 }
 
+function timestampToDate($timestamp){
+  return date('d M Y', strtotime($timestamp));
+}
+
 function error($str){
   return '<div class="error">'.upper($str).'</div>';
 }

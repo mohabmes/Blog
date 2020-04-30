@@ -3,6 +3,7 @@ class Blog {
   private $_title,
           $_body,
           $_slug,
+          $_image,
           $_tags,
           $_created,
           $_updated = null,
@@ -93,7 +94,7 @@ class Blog {
     $qry->execute([
       'slug' => $slug
     ]);
-    $result = $qry->fetch(PDO::FETCH_ASSOC);
+    $result = $qry->fetch(PDO::FETCH_OBJ);
     return $result;
   }
 
@@ -133,7 +134,7 @@ class Blog {
     $qry = $this->_db->prepare("SELECT COUNT(id) FROM `posts`");
     $qry->execute();
     $result = $qry->fetch(PDO::FETCH_NUM);
-    return $result[0];
+    return (int)$result[0];
   }
 
   public function getDate($created, $updated){

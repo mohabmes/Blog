@@ -92,7 +92,10 @@ img {
 }
 .footer a:active {text-decoration: underline;}
 
-
+.iconify {
+	width: 25px;
+    height: 25px;
+}
 
 /* =====================================================
  End Reviewed
@@ -111,21 +114,6 @@ img {
 	display:inline-block;
 	margin: 0 10px;
 }
-
-/* =====================================================
-  About Page
-======================================================== */
-.welcome-msg{
-	margin: 15px 0;
-	padding: 20px 25px;
-	background-color: #fafafa;
-	border: 2px solid #ECF0F1;
-}
-.welcome-msg p{
-	margin-top: 5px;
-}
-
-
 
 /* =====================================================
   Home Page
