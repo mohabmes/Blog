@@ -14,7 +14,9 @@
         </span>
       <?php endforeach; ?>
     </center>
-    <img src="<?=IMG.$post->image?>">
+    <?php if(!empty($post->image)):?>
+      <img src="<?=IMG.$post->image?>">
+    <?php endif;?>
     <p class='post-body'><?=$post->body?></p>
     <?php foreach ($post->tags as $tag):?>
       <span class="tags">

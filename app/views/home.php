@@ -5,7 +5,9 @@
             <div class='post'>
                 <a href='<?=POST.$post->slug?>'>
                   <h3 class='post-title'><?=$post->title?></h3>
-                  <img src="<?=IMG.$post->image?>">
+                  <?php if(!empty($post->image)):?>
+                    <img src="<?=IMG.$post->image?>">
+                  <?php endif;?>
                   <p class='post-body'><?=summary($post->body)?></p>
                   <p class='post-date'><?=timestampToDate($post->created)?></p>
                 </a>
