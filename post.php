@@ -5,21 +5,17 @@ $slug = Input::get('slug');
 
 $blog = new Blog();
 $post = $blog->getBySlug($slug);
-$post->tags = explode(';', $post->tags);
-
-
 
 if(!empty($post)) {
   $comments = new Comments();
   $comments = $comments->getById($post->id);
-  // print_r($comments);
-  // exit();
+  $post->tags = splitTags($post->tags);
 }
 else { redirectTo(BASE_URL); }
 
+
+
 if(!empty(Input::get('comment')) && !empty(Input::get('email'))){
-  // print_r($_GET);
-  // exit();
   $newComment = array(
     'name' => !empty($_GET['name']) ? $_GET['name'] : 'Anonymous',
     'title' =>Input::get('title'),
