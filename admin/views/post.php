@@ -21,28 +21,20 @@
       margin: 10px 0;
     }
     input[type="submit"]{ width: 10%; }
-    .error{
-      width:60%;
-      border: 1px solid #fafafa;
-      background-color: #2ecc71;
-      padding: 20px;
-      margin: 15px auto;
-    }
   </style>
   <body>
     <div>
       <form method="post" enctype="multipart/form-data">
-				<? if(!empty($blog)):?>
-					<h3 for="title">Edit: <?=escape($blog['title'])?></h3>
+				<? if($mode == "edit"):?>
+					<h3 for="title">Edit: <?=$blog['title']?></h3>
 	        <label for="title">Title:</label>
-	        <input type="text" name="title" value="<?=escape($blog['title'])?>" required>
+	        <input type="text" name="title" value="<?=$blog['title']?>" required>
 	        <label for="tags">Tags:</label>
-	        <input type="text" name="tags" value="<?=escape($blog['tags'])?>" required>
+	        <input type="text" name="tags" value="<?=$blog['tags']?>" required>
 					<label for="tags">Thumbnail: </label><span>(currently using <?=$blog['image']?> as a cover)</span>
-					<input type="file" name="image" accept="image/*" value="">
-
+					<input type="file" name="image" accept="image/*">
 	        <label for="body">The content:</label>
-	        <textarea name="body" rows="16" cols="100" required><?=escape($blog['body'])?></textarea>
+	        <textarea name="body" rows="16" cols="100" required><?=$blog['body']?></textarea>
 				<? else:?>
 					<label for="title">Title:</label>
 					<input type="text" name="title" value="<?=Input::get('title')?>" required>
@@ -51,9 +43,9 @@
 					<label for="tags">Thumbnail:</label>
 					<input type="file" name="image" accept="image/*">
 					<label for="body">The content:</label>
-					<textarea name="body" rows="16" cols="100" required><?=escape(Input::get('body'))?></textarea>
+					<textarea name="body" rows="30" cols="100" required><?=Input::get('body')?></textarea>
 				<? endif;?>
-        <input type="submit" value="Add">
+        <input type="submit" value="OK">
       </form>
     </div>
   </body>

@@ -17,7 +17,11 @@
     <?php if(!empty($post->image)):?>
       <img src="<?=IMG.$post->image?>">
     <?php endif;?>
-    <p class='post-body'><?=$post->body?></p>
+
+    <article class="markdown-body post-body" style=".markdown-body {box-sizing: border-box;	min-width: 200px; max-width: 980px; margin: 0 auto; padding: 45px;}">
+      <?=$post->body?>
+    </article>
+
     <?php foreach ($post->tags as $tag):?>
       <span class="tags">
         <a href='search/?tag=<?=trim($tag)?>'><span><?=trim($tag)?></span></a>

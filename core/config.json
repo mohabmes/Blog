@@ -7,7 +7,7 @@
 	"instagram":"",
 	"facebook":"",
 	"linkedin":"",
-	"postsPerPage": 5,
+	"postsPerPage": 6,
 
 	"database":{
 		"host": "127.0.0.1",

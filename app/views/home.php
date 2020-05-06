@@ -19,9 +19,9 @@
 
       <div class="pagination clearfix">
         <center>
-          <?php for($i=1 ; $i<=$numOfPages ; $i++):?>
-            <a href="<?=PAGE.$i?>"> <?=$i?> </a>
-          <?php endfor; ?>
+          <? if($currentPage < $numOfPages):?>
+            <a href="<?=PAGE.($currentPage+1)?>">NEXT</a>
+          <? endif; ?>
         </center>
       </div>
 </div>

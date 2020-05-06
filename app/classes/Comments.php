@@ -44,8 +44,10 @@ class Comments {
     return $result;
   }
 
-  public function error(){
-    return $this->_error;
+  public function error() {
+    if(!empty($this->_error))
+      return $this->_error[0];
+    return false;
   }
 
   private function validate(){

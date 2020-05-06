@@ -21,5 +21,5 @@ require_once(classes . 'Input.php');
 require_once(classes . 'Comments.php');
 
 
-define('POST', BASE_URL."post.php?slug=");
-define('PAGE', BASE_URL."index.php?p=");
+define('POST', BASE_URL."post/");
+define('PAGE', BASE_URL."page/");

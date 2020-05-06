@@ -7,7 +7,8 @@ class Blog {
           $_tags,
           $_created,
           $_error = array(),
-          $_db;
+          $_db,
+          $_editMode = false;
 
   function __construct(){
     global $db;
@@ -17,13 +18,13 @@ class Blog {
   public function create($blog = array()) {
     if(!empty($blog) && sizeof($blog)>=4) {
       $this->_title = trim(filter_var($blog['title'], FILTER_SANITIZE_STRING));
-      $this->_body =  filter_var($blog['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      $this->_body =  filter_var(utf8_encode($blog['body']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
       $this->_slug =  $this->slugFilter(filter_var($blog['slug'], FILTER_SANITIZE_STRING));
       $this->_tags  = trim(filter_var($blog['tags'], FILTER_SANITIZE_STRING));
       $this->_image  = $blog['image'];
 
     if($this->validate()){
-        // $this->_db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES 'utf8'");
+        //
         $qry = $this->_db->prepare('INSERT INTO posts (`slug`, `title`, `body`, `image`, `tags`) VALUES ( :slug, :title, :body, :image, :tags)');
         $result = $qry->execute([
           'slug' => $this->_slug,
@@ -39,29 +40,26 @@ class Blog {
   }
 
   public function update($id, $blog = array()) {
+    $this->_editMode = true;
+
     if(!empty($id)){
       if(!empty($blog) && sizeof($blog)>3) {
         $this->_title = trim(filter_var($blog['title'], FILTER_SANITIZE_STRING));
-        $this->_body =  filter_var($blog['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $this->_slug =  $this->slugFilter(filter_var($blog['slug'], FILTER_SANITIZE_STRING));
+        $this->_body =  filter_var(utf8_encode($blog['body']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        // $this->_slug =  $this->slugFilter(filter_var($blog['slug'], FILTER_SANITIZE_STRING));
         $this->_tags  = trim(filter_var($blog['tags'], FILTER_SANITIZE_STRING));
         $this->_image  = $blog['image'];
 
-        // $this->_slug .=rand(); `slug`, `title`, `body`, `image`, `tags`
-// echo "<pre>"; print_r($blog); exit();
         if($this->validate()){
-          $sql = "UPDATE `posts` SET `title`= :title,`body`= :body,`tags`= :tags,`image`= :image ,`slug`= :slug WHERE `id`= :id";
+          $sql = "UPDATE `posts` SET `title`= :title,`body`= :body,`tags`= :tags,`image`= :image  WHERE `id`= :id";
           $qry = $this->_db->prepare($sql);
-          $result = $qry->execute([
+          return $qry->execute([
             'id' => $id,
-            'slug' => $this->_slug,
             'title' => $this->_title,
             'body' => $this->_body,
             'image' => $this->_image,
             'tags' => $this->_tags
           ]);
-          print_r($qry->debugDumpParams());
-          return $result;
         }
       }
     }
@@ -167,13 +165,11 @@ class Blog {
   }
 
   private function validate() {
-    if(!$this->checkSlug($this->_slug) && strlen($this->_slug)>20){}
-    else {
+    if($this->_editMode == false && $this->checkSlug($this->_slug) && strlen($this->_slug)<20){
       $this->_error[] = 'Slug must be unique, more than 20 Characters';
       return false;
     }
-    if(strlen($this->_title)>=20){}
-    else {
+    if(strlen($this->_title)<20){
       $this->_error[] = 'Title must be more than 20 Characters';
       return false;
     }
@@ -194,7 +190,9 @@ class Blog {
   }
 
   public function error() {
-    return $this->_error;
+    if(!empty($this->_error))
+      return $this->_error[0];
+    return false;
   }
 
 }

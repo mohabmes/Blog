@@ -10,6 +10,7 @@ define('VIEW', './views/');
 define('ADMIN',   './admin/');
 define('BASE_URL','http://localhost/Blog/');
 define('IMG',     '../resources/images/');
+define('POST', BASE_URL."post.php?slug=");
 
 require_once(CORE . 'config.php');
 require_once(CORE . 'db.php');

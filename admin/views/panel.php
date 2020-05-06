@@ -14,7 +14,7 @@
       width:90%; margin:0 auto; padding:20px;background-color:white;
     }
     .error{
-      width:60%;
+      width:90%;
       border: 1px solid #fafafa;
       background-color: #2ecc71;
       padding: 20px;
@@ -33,7 +33,7 @@
     		<tr>
     			<th>Title</th>
           <th>Tag</th>
-    			<th>Slug</th>
+    			<th></th>
     			<th></th>
     			<th></th>
     		</tr>
@@ -43,7 +43,7 @@
     			<tr>
     				<td><?=$page->title; ?></td>
             <td><?=$page->tags; ?></td>
-    				<td><a href="<?=BASE_URL . "/post/".$page->slug?>"><?=$page->slug; ?></a></td>
+    				<td><a href="<?=POST . $page->slug?>">View</a></td>
     				<td><a href="<?=BASE_URL . "/admin/edit.php?id=". $page->id ?>">Edit</a></td>
     				<td><a href="<?=BASE_URL . "/admin/delete.php?id=".$page->id ?>">Delete</a></td>
     			</tr>

@@ -4,33 +4,30 @@ $blogObj = new Blog();
 $id = Input::get('id');
 $blog = array();
 
+$mode = "edit";
+
 if(!empty($id)){
   $blog = $blogObj->getById($id);
-
   if(!empty($blog)){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      //
       $content = array(
-        'title' => Input::get('title'),
-        'slug' => uniqueSlug().'-'.replaceSpecialWithDash(Input::get('title')),
+        'title' => upper(Input::get('title')),
         'body' => Input::get('body'),
         'tags' => Input::get('tags'),
         'image' => $blog['image']
       );
 
-      if(!empty($_POST['image'])){
+      if(!empty($_FILES['image']['name'])){
         $imageName = uploadImage();
         $content['image'] = $imageName;
       }
 
-// echo "<pre>";print_r($content);
-// exit();
-
       if($blogObj->update($id, $content)){
         $_SESSION['msg'] = 'Updated successfully.';
         header('Location: panel.php');
-      } else {
-        $_SESSION['msg'] = $blogObj->error()[0];
+      }
+      else {
+        $_SESSION['msg'] = $blogObj->error();
         echo error($_SESSION['msg']);
         unset($_SESSION['msg']);
       }
@@ -39,6 +36,5 @@ if(!empty($id)){
    else { redirectTo(BASE_URL."admin"); }
 }
 else { redirectTo(BASE_URL."admin"); }
-// print_r($blog);
 
 require_once(VIEW . 'post.php');

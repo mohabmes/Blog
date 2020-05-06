@@ -9,6 +9,7 @@
 		<script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 		<link type="text/css" rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 		<link type="text/css" rel="stylesheet" href="<?=CSS.'style.css'; ?>">
+		<link type="text/css" rel="stylesheet" href="<?=CSS.'github-markdown.css'; ?>">
 		<link href="https://fonts.googleapis.com/css2?&family=Satisfy&display=swap" rel="stylesheet">
 	</head>
 	<body>
@@ -17,3 +18,4 @@
 				<a href="<?=BASE_URL; ?>" style="font-family: 'Satisfy', cursive;"><?=title();?></a>
 		  </div>
 		</div>
+	<div class="wrapper"><?php showErrorIfExist();?></div>
