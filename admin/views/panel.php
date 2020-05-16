@@ -44,14 +44,14 @@
     				<td><?=$page->title; ?></td>
             <td><?=$page->tags; ?></td>
     				<td><a href="<?=POST . $page->slug?>">View</a></td>
-    				<td><a href="<?=BASE_URL . "/admin/edit.php?id=". $page->id ?>">Edit</a></td>
-    				<td><a href="<?=BASE_URL . "/admin/delete.php?id=".$page->id ?>">Delete</a></td>
+    				<td><a href="<?=BASE_URL . "admin/edit.php?id=". $page->id ?>">Edit</a></td>
+    				<td><a href="<?=BASE_URL . "admin/delete.php?id=".$page->id ?>">Delete</a></td>
     			</tr>
     		<?php endforeach; ?>
     	</tbody>
 
     </table>
-    <a href="<?=BASE_URL."/admin/add.php"?>">Add new page</a>
+    <a href="<?=BASE_URL."admin/add.php"?>">Add new page</a>
   </div>
 
 </body>

@@ -84,7 +84,7 @@ class Blog {
   }
 
   public function getBySlug($slug){
-    $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE slug = :slug');
+    $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE slug = :slug and deleted=0');
     $qry->execute([
       'slug' => $slug
     ]);
@@ -93,20 +93,11 @@ class Blog {
   }
 
   public function search($str){
-    $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE `title` LIKE :search OR `body` LIKE :search');
+    $qry = $this->_db->prepare('SELECT * FROM `posts` WHERE tags LIKE :search and deleted=0');
     $qry->execute([
       'search' => "%{$str}%"
     ]);
-    $result = $qry->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-  }
-
-  public function searchByTag($str){
-    $qry = $this->_db->prepare("SELECT * FROM `posts` WHERE `tags` = :search");
-    $qry->execute([
-      'search' => "$str"
-    ]);
-    $result = $qry->fetchAll(PDO::FETCH_ASSOC);
+    $result = $qry->fetchAll(PDO::FETCH_OBJ);
     return $result;
   }
 
@@ -117,41 +108,12 @@ class Blog {
     return $result;
   }
 
-  // public function getRecent($count){
-  //   $qry = $this->_db->prepare("SELECT * FROM `posts` ORDER BY `id` DESC LIMIT {$count}");
-  //   $qry->execute();
-  //   $result = $qry->fetchAll(PDO::FETCH_ASSOC);
-  //   return $result;
-  // }
-
   public function getPostsCount(){
     $qry = $this->_db->prepare("SELECT COUNT(id) FROM `posts` where deleted=0");
     $qry->execute();
     $result = $qry->fetch(PDO::FETCH_NUM);
     return $result[0];
   }
-
-  // public function getDate($created, $updated){
-  //   if(!empty($updated)){
-  //     return "Created {$created} - Updated {$updated}";
-  //   } else {
-  //     return "Created {$created}";
-  //   }
-  // }
-
-  // public function getSlug($slug){
-  //   $url =  BASE_URL . '/post/' . $slug;
-  //   return $url;
-  // }
-
-  // public function getBody($body){
-  //   return nl2br($body);
-  // }
-
-  // public function getPreviewBody($body){
-  //   $nbody = substr($body,0, 500);
-  //   return $nbody . '...';
-  // }
 
   private function checkSlug($slug){
     global $db;

@@ -24,7 +24,7 @@ if(!empty($id)){
 
       if($blogObj->update($id, $content)){
         $_SESSION['msg'] = 'Updated successfully.';
-        header('Location: panel.php');
+        redirectTo(BASE_URL."admin");
       }
       else {
         $_SESSION['msg'] = $blogObj->error();

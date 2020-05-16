@@ -1,11 +1,11 @@
 <div class="wrapper">
   <div class="footer">
-      <a href="#"><span class="iconify" data-icon="ei-sc-facebook" data-inline="false"></span></a>
-      <a href="#"><span class="iconify" data-icon="ei-sc-twitter" data-inline="false"></span></a>
-      <a href="#"><span class="iconify" data-icon="ei-sc-instagram" data-inline="false"></span></a>
-      <a href="#"><span class="iconify" data-icon="ei-sc-linkedin" data-inline="false"></span></a>
-      <a href="#"><span class="iconify" data-icon="ei-sc-github" data-inline="false"></span></a>
-      <a href="#"><span class="iconify" data-icon="ei:envelope" data-inline="false"></span></span></a>
+    <?php foreach ($GLOBALS['config']['social'] as $key => $value): ?>
+      <?php if(!empty($value)):?>
+        <a href="<?=$value?>"><span class="iconify" target="_blank" data-icon="ei-sc-<?=$key?>" data-inline="false"></span></a>
+      <?php endif;?>
+    <?php endforeach;?>
+      <a href="mailto:<?=$GLOBALS['config']['email']?>"><span class="iconify" target="_blank" data-icon="ei:envelope" data-inline="false"></span></span></a>
   </div>
 </div>
 </body>

@@ -31,7 +31,7 @@
 	        <input type="text" name="title" value="<?=$blog['title']?>" required>
 	        <label for="tags">Tags:</label>
 	        <input type="text" name="tags" value="<?=$blog['tags']?>" required>
-					<label for="tags">Thumbnail: </label><span>(currently using <?=$blog['image']?> as a cover)</span>
+					<label for="tags">Thumbnail: </label><? if(!empty($blog['image'])):?><span>(currently using <?=$blog['image']?> as a cover)</span><?endif?>
 					<input type="file" name="image" accept="image/*">
 	        <label for="body">The content:</label>
 	        <textarea name="body" rows="16" cols="100" required><?=$blog['body']?></textarea>

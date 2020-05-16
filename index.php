@@ -32,5 +32,3 @@ $numOfPages = paginationCount($blogObj, $postsPerPage);
 $currentPage = empty(Input::get('p'))? 1 : (int)Input::get('p');
 
 require_once(VIEWS . 'home.php');
-
-

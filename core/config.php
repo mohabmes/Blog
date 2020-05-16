@@ -1,10 +1,5 @@
 <?php
 $json = file_get_contents(CORE . "config.json");
-$config_json = json_decode($json, TRUE);
-$config = array();
-foreach ($config_json as $key => $value) {
-  $config[$key] = $value;
-}
-$_GLOBALS['config'] = $config;
-// echo "<pre>"; print_r($GLOBALS['config']);exit();
+$config_json = json_decode($json, True);
+$GLOBALS['config'] = $config_json;
 ?>

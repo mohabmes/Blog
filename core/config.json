@@ -1,13 +1,16 @@
 {
 	"title":"Slimey",
-	"email":"",
-	"description":"",
-	"twitter":"",
-	"github":"",
-	"instagram":"",
-	"facebook":"",
-	"linkedin":"",
-	"postsPerPage": 6,
+	"base_url":"http://localhost/Blog",
+	"email":"yourmail@mail.com",
+	"postsPerPage": 3,
+
+	"social":{
+		"twitter":"https://twitter.com/username",
+		"github":"https://github.com/username",
+		"instagram":"https://instagram.com/username",
+		"facebook":"https://facebook.com/username",
+		"linkedin":"https://linkedin.com/in/username"
+	},
 
 	"database":{
 		"host": "127.0.0.1",
