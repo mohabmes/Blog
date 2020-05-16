@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 08, 2017 at 11:04 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Host: localhost
+-- Generation Time: May 16, 2020 at 09:24 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -32,9 +34,10 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `title` varchar(150) DEFAULT NULL,
   `text` text NOT NULL,
   `post_id` int(11) NOT NULL,
-  `created` varchar(14) NOT NULL
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -45,43 +48,14 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
-  `slug` varchar(30) NOT NULL,
-  `title` varchar(50) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `title` varchar(100) NOT NULL,
   `body` text NOT NULL,
-  `tags` varchar(15) NOT NULL,
-  `created` varchar(14) NOT NULL,
-  `updated` varchar(14) NOT NULL
+  `image` varchar(100) NOT NULL,
+  `tags` varchar(500) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tags`
---
-
-CREATE TABLE `tags` (
-  `id` int(11) NOT NULL,
-  `title` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_data`
---
-
-CREATE TABLE `user_data` (
-  `password` varchar(32) NOT NULL,
-  `about` text NOT NULL,
-  `welcome` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_data`
---
-
-INSERT INTO `user_data` (`password`, `about`, `welcome`) VALUES
-('', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet. Fusce eleifend orci ut dolor vulputate Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec fermentum enim, eget vestibulum nibh. Donec vitae gravida risus. Nunc tincidunt vitae tortor pellentesque laoreet. Fusce eleifend orci ut dolor vulputate.');
 
 --
 -- Indexes for dumped tables
@@ -101,13 +75,6 @@ ALTER TABLE `posts`
   ADD UNIQUE KEY `slug` (`slug`);
 
 --
--- Indexes for table `tags`
---
-ALTER TABLE `tags`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `title` (`title`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -115,17 +82,15 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
---
--- AUTO_INCREMENT for table `tags`
---
-ALTER TABLE `tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
