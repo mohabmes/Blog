@@ -9,20 +9,13 @@
 body {
 	color:black;
 	margin: auto;
-	margin-top:70px;
 	font: 1.125em/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.wrapper { width: 80%; margin: 0 auto; }
+.wrapper {
+	margin: 0 auto;
+	max-width: 700px;
+ }
 a { text-decoration:none; color:black; }
-.error {
-	width: 70%;
-	padding:7px 0;
-	margin:7px auto;
-	text-align:center;
-	background-color: yellow;
-	border: 2px solid gray;
-	opacity:0.5;
-}
 
 /* ---- Float clearfix ----  */
 .clearfix::after {
@@ -31,149 +24,94 @@ a { text-decoration:none; color:black; }
 	clear: both;
 }
 
-
-/* =====================================================
-  Header File = Navigation
-======================================================== */
-nav{
-	width:100%;
-	height:60px;
-	position:absolute;
-	top:-10px;
-	z-index:10;
-	background-color: #fafafa;
-	border-bottom: 3px solid #ECF0F1;
+/* ---- Post ----  */
+img {
+    display: block;
+    max-width: 100%;
+    font-style: italic;
+		margin: 0 auto 16px;
 }
-nav a{
+.post {
+	margin: 20px 0;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #E9EFF3;
+}
+.post:hover .post-title{ opacity: 0.5; }
+.post-title {
+	margin-bottom: 10px;
+	font-size: 24px;
+	font-weight: 600;
+	transition: .4s;
+}
+
+@media (min-width: 40em)
+.post-title {
+    font-size: 19px;
+}
+
+/* ---- Nav ----  */
+
+.nav{
+	padding: 7px 0;
+	border-bottom: 1px solid #E9EFF3;
+}
+.nav a{
 	display: inline-block;
-	font-size: 0.9125em;
+	font-size: 1.3125em;
 	padding: 3px;
 }
-nav li{
-	float:left;
-	list-style:none;
-	margin: 0;
-	margin-right: 15px;
+
+/* ---- footer ----  */
+
+.footer{
+	text-align:center;
+	margin: 25px 0 10px;
+	padding: 5px 0;
+	border-top: 1px solid #E9EFF3;
 }
-
-nav a:hover {
-	opacity: 0.6;
-	border-bottom: 1px black solid;
-}
-
-
-
-.separate{
-	color: #DDDFD6;
-	display:inline-block;
-	margin: 0 10px;
-}
-footer {
-  background: #fafafa;
-  border-top: 7px solid #ECF0F1;
-	margin-top:20px;
-  padding: 30px 0;
-  font-size: 12px;
-  color: #a5a5a5;
-}
-footer ul {margin: 0; padding: 0; float: left;}
-footer ul li {display: inline-block;}
-footer ul li:after {content:" | "}
-footer ul li:last-child:after {content:"";}
-footer p {margin: 0; padding-right: 3px;}
-footer a {color: #539def; margin: 0 10px;}
-footer li:first-child a {margin-left: 4px;}
-footer a:hover, .footer a:active {text-decoration: underline;}
-
-/* =====================================================
-  About Page
-======================================================== */
-.welcome-msg{
-	margin: 15px 0;
-	padding: 20px 25px;
-	background-color: #fafafa;
-	border: 2px solid #ECF0F1;
-}
-.welcome-msg p{
-	margin-top: 5px;
-}
-
-
-
-/* =====================================================
-  Home Page
-======================================================== */
-.form {
+.footer a, .icon{
 	display: inline-block;
-	width: 100%;
-	margin: 25px 0;
+	font-size: 0.9125em;
+	padding: 5px 2px;
+	margin: 0;
+	vertical-align: middle;
 }
-input{
-  padding: 10px;
+.footer a:active {text-decoration: underline;}
+.iconify { width: 25px; height: 25px; }
+.tags {display: inline-block; margin: 10px 4px;}
+.tags a{
+	display: inline-block;
+	padding: 4px 16px;
+	margin: 0 8px 4px 0;
+	font-size: 12px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	line-height: 25px;
+	background-color: #EAEAEA;
+	transition: .4s;
+}
+
+form { width: 100%; }
+.col-1-width{ width: 32.8%; }
+input[type="submit"]:hover{ cursor: pointer; }
+input, textarea{
+  padding: 7px;
   background-color: #fff;
   border: 1px solid #ccc;
-  margin: 0;
-}
-input[type="text"]{
-  width: 70%;
+  margin: 5px 0;
+	width: 100%;
+	font-size: 0.825em
 }
 input[type="submit"]{
-  padding: 10px 17px;
+  padding: 7px 10px;
   background-color:#07a7c0;
   color: white;
-}
-input[type="submit"]:hover{
-  cursor: pointer;
-}
-.recent, .panel, .tags {margin-bottom: 10px;}
-.recent, .panel { min-height: 600px; padding: 5px; }
-.recent, .panel { width: 75%; margin-right: 10px; float: left; }
-.tags {
-	width: 24%;
-	float: right;
-	padding-left: 7px;
-	margin: 5px 0;
-	border-left: 2px solid #ECF0F1;
-	border-radius: 5px;
-}
-.about {
-	width: 24%;
-	float: right;
-	font-size: 0.8125em;
-	padding:  12px;
-	background-color: #ECF0F1;
-}
-.tags span {
-	display: inline-block;
-	background-color: #ECF0F1;
-	padding: 5px 7px;
-	margin: 2px 1px;
-	border-radius: 2px;
+	width: 20%;
 }
 .title {
 	width: 100%;
 	margin: 0 0 5px 0;
 	padding: 5px;
 	border-bottom: 2px black solid;
-
-}
-.title:before {content:" # "}
-
-.post {
-	margin: 15px 0;
-	max-height: 225px;
-	overflow: hidden;
-	padding: 20px 15px;
-	border: 1px solid #ECF0F1;
-	background-color: #fcfcfc;
-	border-radius: 2px;
-}
-.post:hover .post-title{
-	opacity: 0.75;
-}
-.post-title {
-	font-size: 1.25em;
-	margin: 2px 0 2px 0;
 }
 .post-date {
 	font-size: 0.8125em;
@@ -185,94 +123,24 @@ input[type="submit"]:hover{
 	font-size: 0.9125em;
 	opacity: 0.75;
 	margin: 7px 0;
-}
-
-/* =====================================================
-  Posts Page
-======================================================== */
-
-.view {
-	width: 70%;
-}
-.tag-sec {
-	display: inline-block;
-	margin: 10px 0;
-}
-.tag-sec span {
-	display: inline-block;
-	background-color: #EEE;
-	padding: 5px 7px;
-	margin: 2px 1px;
-	border-radius: 2px;
-}
-.post-title-view {
-	font-size: 1.25em;
-	margin: 10px 0;
-}
-.post-body-view {
-	font-size: .975em;
-	margin: 10px 0;
-	opacity: 0.8;
-}
-
-.post-view {
-	margin: 15px 0 15px 0;
-	padding: 20px 15px;
-	border: 1px solid #ECF0F1;
-	background-color: #fcfcfc;
-	border-radius: 2px;
-}
-.post-date-view {
-	font-size: 0.8125em;
-	margin: 0;
+	padding-bottom: 10px;
 }
 .comment{
 	width:100%;
-	background-color:white;
 	border: 1px dotted #ccc ;
 	border-left: 5px solid #ccc;
 	padding:10px 15px;
-	margin:20px 0;
-	font-size: 0.9125em;
+	margin: 10px 0;
+	font-size: 0.8125em;
 }
-.comment p{
-	margin-left:25px;
-}
-/********************************************
-Pagination
-********************************************/
-.pagination{width:100%; margin: 0 15px;}
-.pagination ul{
+.comment h4{ display: inline-block; margin: 0;}
+.comment p{ margin: 5px 0; opacity: 0.8;}
+
+.msg{
 	width:100%;
-	list-style:none;
-	padding:0;
-	margin: 0 auto;
+	border: 1px solid #fafafa;
+	background-color: #2ecc71;
+	padding: 10px;
+	margin: 7px auto;
 }
-.pagination ul li{
-	float:left;
-	background-color:#fafafa;
-	border: 1px solid #bbb;
-}
-.pagination ul li a{
-	display:inline-block;
-	padding: 4px 10px;
-}
-.pagination ul li a:hover {
-	background-color: #e6e6e6;
-}
-/********************************************
-Comment Section
-********************************************/
-.post-view form input{
-	display: inline-block;
-	margin: 7px 0;
-	width: 49%;
-}
-.post-view form input[type="submit"]{
-	display: block;
-	width: 10%;
-}
-.post-view form textarea{
-	padding: 7px;
-	width: 99%;
-}
+.alert-danger{background-color: tomato; opacity: .7}

@@ -1,4 +1,12 @@
 <?php
 require_once('admin-ini.php');
+$b = new Blog();
+$postCount = $b->getPostsCount();
+$allposts = $b->getFrom(0, $postCount);
 
-header("Location: panel.php");
+if(isset($_SESSION['msg'])){
+  echo error($_SESSION['msg']);
+  unset($_SESSION['msg']);
+}
+
+require_once(VIEW .'panel.php');

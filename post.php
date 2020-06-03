@@ -1,33 +1,38 @@
 <?php
 require_once('core/ini.php');
+require_once(classes . "parsedown.php");
 
 $slug = Input::get('slug');
 
 $blog = new Blog();
-if($blog->getBySlug($slug)) {
-  $data = $blog->getBySlug($slug);
-  $data['created']  = $blog->getDate($data['created'], $data['updated']);
-  $data['body'] = $blog->getBody($data['body']);
+$post = $blog->getBySlug($slug);
 
-  $cmt = new Comments();
-  $comments = $cmt->getById($data['id']);
+if(!empty($post)) {
+  $comments = new Comments();
+  $comments = $comments->getById($post->id);
+  $post->tags = splitTags($post->tags);
 
-  if(!empty(Input::get('comment'))){
-    $newComment = array(
-      'name' => Input::get('name'),
-      'email' =>Input::get('email'),
-      'text' => Input::get('comment')
-    );
-    if($cmt->create($data['id'], $newComment)){
-      $_SESSION['msg'] = 'Thanks for commenting.';
-      echo error($_SESSION['msg']);
-      session_unset('msg');
-    } else {
-      echo error($cmt->error()[0]);
-    }
-  }
-} else {
-  header('Location: ' . BASE_URL);
+  $Parsedown = new Parsedown();
+  $post->body = $Parsedown->text(htmlspecialchars_decode($post->body));
 }
+else { redirectTo(BASE_URL); }
 
+
+if(!empty(Input::get('comment')) && !empty(Input::get('email'))){
+  $newComment = array(
+    'name' => !empty($_POST['name']) ? $_POST['name'] : 'Anonymous',
+    'title' =>Input::get('title'),
+    'email' =>Input::get('email'),
+    'text' => utf8_encode(Input::get('comment'))
+  );
+
+  $comment = new Comments();
+  $result = $comment->create($post->id, $newComment);
+  if($result){
+    set_alert_msg('Received your comment, Thank you :)', "info");
+  }
+  else {
+    set_alert_msg($comment->error());
+  }
+}
 require_once(VIEWS . 'post.php');

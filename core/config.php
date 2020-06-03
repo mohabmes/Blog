@@ -1,9 +1,5 @@
 <?php
-$GLOBALS['config'] = array(
-  'mysql' => array(
-    'host' => '127.0.0.1',
-    'username' => 'root',
-    'password' => '',
-    'db' => 'blog'
-  )
-);
+$json = file_get_contents(CORE . "config.json");
+$config_json = json_decode($json, True);
+$GLOBALS['config'] = $config_json;
+?>
